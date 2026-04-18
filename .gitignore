@@ -123,3 +123,4 @@ Thumbs.db
 
 # Application specific
 # Add any application-specific files you want to ignore
+logs/
