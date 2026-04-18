@@ -1,0 +1,654 @@
+// Variables
+$primary-color: #007AFF;
+$secondary-color: #34C759;
+$danger-color: #FF3B30;
+$warning-color: #FF9500;
+$info-color: #00C7FF;
+$light-gray: #F2F2F7;
+$medium-gray: #E5E5EA;
+$dark-gray: #8E8E93;
+$text-color: #333333;
+$border-radius: 12px;
+$box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease;
+
+// Reset & Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: $light-gray;
+  color: $text-color;
+}
+
+// App Container
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+  padding-bottom: 100px;
+}
+
+// Header
+.header {
+  background: linear-gradient(135deg, $primary-color 0%, #5B9EFF 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 0 0 $border-radius $border-radius;
+  box-shadow: $box-shadow;
+  margin-bottom: 20px;
+
+  .header-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Error Banner
+.error-banner {
+  background-color: #FFE5E5;
+  color: $danger-color;
+  padding: 12px 16px;
+  margin: 16px;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-left: 4px solid $danger-color;
+  animation: slideDown 0.3s ease;
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: $danger-color;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Search Section
+.search-section {
+  padding: 16px;
+  margin-bottom: 16px;
+
+  .search-container {
+    position: relative;
+
+    .search-input {
+      width: 100%;
+      padding: 12px 40px 12px 16px;
+      border: none;
+      border-radius: $border-radius;
+      background-color: white;
+      font-size: 16px;
+      color: $text-color;
+      box-shadow: $box-shadow;
+      transition: $transition;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      &::placeholder {
+        color: $dark-gray;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      pointer-events: none;
+    }
+  }
+}
+
+// Loading State
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid $medium-gray;
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  p {
+    font-size: 16px;
+    color: $dark-gray;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Cars Container
+.cars-container {
+  padding: 0 16px;
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: white;
+  border-radius: $border-radius;
+  margin: 16px 0;
+
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+    color: $text-color;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $dark-gray;
+  }
+}
+
+// Cars Grid
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Car Card
+.car-card {
+  background: white;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .car-card-header {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .car-icon {
+      font-size: 40px;
+    }
+
+    .car-badge {
+      background-color: $primary-color;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  .car-card-content {
+    padding: 16px;
+    flex-grow: 1;
+
+    .car-make {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: $text-color;
+    }
+
+    .car-model {
+      font-size: 16px;
+      color: $dark-gray;
+      margin-bottom: 12px;
+    }
+
+    .car-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .meta-item {
+        font-size: 12px;
+        color: $dark-gray;
+        background-color: $light-gray;
+        padding: 4px 8px;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  .car-card-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background-color: $light-gray;
+    justify-content: space-between;
+
+    .btn {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: $transition;
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Buttons
+.btn {
+  padding: 12px 24px;
+  border-radius: $border-radius;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.btn-primary {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: #0a60d8;
+      box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $medium-gray;
+    color: $text-color;
+
+    &:hover {
+      background-color: #d1d1d6;
+    }
+  }
+
+  &.btn-warning {
+    background-color: $warning-color;
+    color: white;
+
+    &:hover {
+      background-color: #e68900;
+    }
+  }
+
+  &.btn-danger {
+    background-color: $danger-color;
+    color: white;
+
+    &:hover {
+      background-color: #e6281f;
+    }
+  }
+
+  &.btn-info {
+    background-color: $info-color;
+    color: white;
+
+    &:hover {
+      background-color: #00b8e6;
+    }
+  }
+}
+
+// Floating Action Button
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+  transition: $transition;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 122, 255, 0.6);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .fab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Modal Overlay
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+
+  @media (min-height: 600px) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Modal
+.modal {
+  background: white;
+  border-radius: $border-radius $border-radius 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  animation: slideUp 0.3s ease;
+
+  @media (min-height: 600px) {
+    border-radius: $border-radius;
+    max-height: 80vh;
+  }
+
+  &.modal-detail {
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid $medium-gray;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: $dark-gray;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: $transition;
+
+      &:hover {
+        background-color: $light-gray;
+        color: $text-color;
+      }
+    }
+  }
+
+  .modal-content {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(90vh - 140px);
+
+    @media (min-height: 600px) {
+      max-height: calc(80vh - 140px);
+    }
+
+    &.detail-content {
+      padding: 0;
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    border-top: 1px solid $medium-gray;
+    justify-content: flex-end;
+
+    @media (max-width: 480px) {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Form Styles
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: $text-color;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid $medium-gray;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: $dark-gray;
+    }
+  }
+}
+
+// Detail Modal Styles
+.detail-section {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  .detail-icon {
+    font-size: 60px;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: $text-color;
+  }
+
+  .detail-year {
+    font-size: 16px;
+    color: $dark-gray;
+    font-weight: 600;
+  }
+}
+
+.detail-info {
+  padding: 20px;
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid $light-gray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: $dark-gray;
+      font-size: 14px;
+    }
+
+    .info-value {
+      color: $text-color;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .app-container {
+    padding-bottom: 80px;
+  }
+
+  .header {
+    padding: 30px 20px;
+
+    .header-title {
+      font-size: 24px;
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+    }
+  }
+
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+
+  .modal {
+    max-width: 100%;
+
+    .modal-footer {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Production
+dist/
+
+# Generated files
+.angular/
+.cache/
+
+# IDEs and text editors
+.vscode/*
+.vscode/extensions
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+
+# Testing
+coverage/
+
+# Environment
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.log
