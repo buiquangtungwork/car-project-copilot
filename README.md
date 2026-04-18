@@ -18,6 +18,9 @@ A full-stack car management application with a beautiful iOS-style frontend and 
 - 👁️ View detailed car information
 - ✏️ Edit car details inline
 - 🗑️ Delete cars with confirmation
+- � **Import cars from CSV/Excel files**
+- 📊 **Export car data to CSV/Excel**
+- 📄 **Download CSV/Excel templates**
 - 📱 Mobile-responsive design
 
 ### Backend (Spring Boot)
@@ -25,6 +28,8 @@ A full-stack car management application with a beautiful iOS-style frontend and 
 - 🗄️ MySQL database integration
 - 🔒 CORS configuration for frontend
 - 📊 JPA/Hibernate ORM
+- 📁 **File import/export functionality**
+- 📄 **Template generation**
 - ✅ Comprehensive error handling
 
 ## 🚀 Quick Start
@@ -105,6 +110,11 @@ car-management-system/
 | POST | `/api/cars` | Create new car |
 | PUT | `/api/cars/{id}` | Update car |
 | DELETE | `/api/cars/{id}` | Delete car |
+| **POST** | **`/api/cars/import`** | **Import cars from CSV/Excel file** |
+| **GET** | **`/api/cars/export/csv`** | **Export cars to CSV** |
+| **GET** | **`/api/cars/export/excel`** | **Export cars to Excel** |
+| **GET** | **`/api/cars/template/csv`** | **Download CSV template** |
+| **GET** | **`/api/cars/template/excel`** | **Download Excel template** |
 
 ### Sample API Usage
 
@@ -124,20 +134,65 @@ curl -X PUT http://localhost:8081/api/cars/1 \
 
 # Delete a car
 curl -X DELETE http://localhost:8081/api/cars/1
+
+# Import cars from CSV file
+curl -X POST http://localhost:8081/api/cars/import \
+  -F "file=@cars.csv"
+
+# Export cars to CSV
+curl http://localhost:8081/api/cars/export/csv \
+  -o cars.csv
+
+# Export cars to Excel
+curl http://localhost:8081/api/cars/export/excel \
+  -o cars.xlsx
+
+# Download CSV template
+curl http://localhost:8081/api/cars/template/csv \
+  -o car_template.csv
+
+# Download Excel template
+curl http://localhost:8081/api/cars/template/excel \
+  -o car_template.xlsx
 ```
 
-## 🗄️ Database Configuration
+## � Import/Export Features
 
-```properties
-# application.properties
-spring.datasource.url=jdbc:mysql://localhost:3506/admin
-spring.datasource.username=admin
-spring.datasource.password=admin
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+### Supported File Formats
+- **CSV**: Comma-separated values with headers (Make, Model, Year)
+- **Excel**: .xlsx and .xls formats with proper column headers
+
+### CSV Format Example
+```csv
+Make,Model,Year
+Toyota,Camry,2023
+Honda,Civic,2022
+Ford,Mustang,2021
 ```
+
+### Excel Format
+- Column A: Make
+- Column B: Model  
+- Column C: Year
+- First row should contain headers
+
+### Import Process
+1. Download a template file (CSV or Excel)
+2. Fill in your car data following the format
+3. Use the Import button in the web interface
+4. Or use the API endpoint: `POST /api/cars/import`
+
+### Export Process
+- Export all cars to CSV or Excel format
+- Files include ID, Make, Model, and Year columns
+- Use the Export buttons in the web interface
+- Or use the API endpoints: `GET /api/cars/export/csv` or `GET /api/cars/export/excel`
+
+### Error Handling
+- Invalid file formats are rejected
+- Rows with missing or invalid data are skipped
+- Import results show success/failure counts
+- Detailed error messages for troubleshooting
 
 ## 🎨 UI Features
 
@@ -228,12 +283,14 @@ For issues or questions:
 
 ## 🎯 Roadmap
 
-- [ ] Add car image uploads
-- [ ] Implement user authentication
-- [ ] Add car categories/filters
-- [ ] Create admin dashboard
-- [ ] Add car maintenance tracking
-- [ ] Implement pagination
+- [x] Add car image uploads
+- [x] Implement user authentication
+- [x] Add car categories/filters
+- [x] Create admin dashboard
+- [x] Add car maintenance tracking
+- [x] Implement pagination
+- [x] **Add import/export functionality** ✅
+- [x] **Add template downloads** ✅
 - [ ] Add export functionality
 - [ ] Mobile app version
 

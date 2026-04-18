@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Car } from '../models/car.model';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,63 @@ export class CarService {
       }),
       catchError(this.handleError)
     );
+  }
+
+  importCars(file: File): Observable<string> {
+    console.log('Importing cars from file:', file.name);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<string>(`${this.apiUrl}/import`, formData).pipe(
+      tap(response => {
+        console.log('Successfully imported cars:', response);
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  exportCarsCsv(): void {
+    console.log('Exporting cars to CSV');
+    this.http.get(`${this.apiUrl}/export/csv`, { responseType: 'blob' }).pipe(
+      tap((blob: Blob) => {
+        saveAs(blob, 'cars.csv');
+        console.log('Successfully exported cars to CSV');
+      }),
+      catchError(this.handleError)
+    ).subscribe();
+  }
+
+  exportCarsExcel(): void {
+    console.log('Exporting cars to Excel');
+    this.http.get(`${this.apiUrl}/export/excel`, { responseType: 'blob' }).pipe(
+      tap((blob: Blob) => {
+        saveAs(blob, 'cars.xlsx');
+        console.log('Successfully exported cars to Excel');
+      }),
+      catchError(this.handleError)
+    ).subscribe();
+  }
+
+  downloadCsvTemplate(): void {
+    console.log('Downloading CSV template');
+    this.http.get(`${this.apiUrl}/template/csv`, { responseType: 'blob' }).pipe(
+      tap((blob: Blob) => {
+        saveAs(blob, 'car_template.csv');
+        console.log('Successfully downloaded CSV template');
+      }),
+      catchError(this.handleError)
+    ).subscribe();
+  }
+
+  downloadExcelTemplate(): void {
+    console.log('Downloading Excel template');
+    this.http.get(`${this.apiUrl}/template/excel`, { responseType: 'blob' }).pipe(
+      tap((blob: Blob) => {
+        saveAs(blob, 'car_template.xlsx');
+        console.log('Successfully downloaded Excel template');
+      }),
+      catchError(this.handleError)
+    ).subscribe();
   }
 
   private handleError(error: HttpErrorResponse) {

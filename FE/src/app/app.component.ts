@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   formCar: Car = { make: '', model: '', year: new Date().getFullYear() };
   loading: boolean = false;
   error: string = '';
+  importLoading: boolean = false;
+  importMessage: string = '';
+  importError: string = '';
 
   constructor(private carService: CarService) {}
 
@@ -135,5 +138,46 @@ export class AppComponent implements OnInit {
         }
       });
     }
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.importCars(file);
+    }
+  }
+
+  importCars(file: File): void {
+    this.importLoading = true;
+    this.importError = '';
+    this.importMessage = '';
+
+    this.carService.importCars(file).subscribe({
+      next: (response) => {
+        this.importMessage = response;
+        this.loadCars(); // Refresh the list
+        this.importLoading = false;
+      },
+      error: (err) => {
+        this.importError = 'Failed to import cars: ' + (err.error || err.message);
+        this.importLoading = false;
+      }
+    });
+  }
+
+  exportCsv(): void {
+    this.carService.exportCarsCsv();
+  }
+
+  exportExcel(): void {
+    this.carService.exportCarsExcel();
+  }
+
+  downloadCsvTemplate(): void {
+    this.carService.downloadCsvTemplate();
+  }
+
+  downloadExcelTemplate(): void {
+    this.carService.downloadExcelTemplate();
   }
 }

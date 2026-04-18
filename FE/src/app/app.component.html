@@ -25,6 +25,43 @@
     </div>
   </div>
 
+  <!-- Import/Export Section -->
+  <div class="import-export-section">
+    <div class="action-buttons">
+      <div class="import-section">
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelected($event)"
+          accept=".csv,.xlsx,.xls"
+          style="display: none"
+        />
+        <button (click)="fileInput.click()" class="btn btn-primary" [disabled]="importLoading">
+          <span *ngIf="importLoading" class="spinner-small"></span>
+          📁 Import
+        </button>
+        <button (click)="downloadCsvTemplate()" class="btn btn-secondary">📄 CSV Template</button>
+        <button (click)="downloadExcelTemplate()" class="btn btn-secondary">📊 Excel Template</button>
+      </div>
+
+      <div class="export-section">
+        <button (click)="exportCsv()" class="btn btn-success">📊 Export CSV</button>
+        <button (click)="exportExcel()" class="btn btn-success">📈 Export Excel</button>
+      </div>
+    </div>
+
+    <!-- Import Messages -->
+    <div *ngIf="importMessage" class="success-message">
+      <span>{{ importMessage }}</span>
+      <button (click)="importMessage = ''" class="close-btn">✕</button>
+    </div>
+
+    <div *ngIf="importError" class="error-message">
+      <span>{{ importError }}</span>
+      <button (click)="importError = ''" class="close-btn">✕</button>
+    </div>
+  </div>
+
   <!-- Loading State -->
   <div *ngIf="loading" class="loading-container">
     <div class="spinner"></div>
