@@ -260,7 +260,49 @@ java -jar /Users/macbook/Documents/Java/car-project/BE/target/car-project-0.0.1-
 9. ✅ All logs appear in console
 10. ✅ Beautiful UI renders correctly
 
-## 📝 Testing Report Template
+## � Import/Export Testing
+
+### Test Import/Export Features
+
+#### Download Templates
+1. Click **"📄 CSV Template"** button
+2. File should download: `car_template.csv`
+3. Click **"📊 Excel Template"** button
+4. File should download: `car_template.xlsx`
+
+#### Import Cars
+1. Click **"📁 Import"** button
+2. Select a CSV or Excel file with car data
+3. Should see success message: "Successfully imported X cars"
+4. Car list should refresh with new cars
+
+#### Export Cars
+1. Click **"📊 Export CSV"** button
+2. File should download: `cars.csv`
+3. Click **"📈 Export Excel"** button
+4. File should download: `cars.xlsx`
+
+#### File Format Requirements
+**CSV Format:**
+```csv
+Make,Model,Year
+Toyota,Camry,2023
+Honda,Civic,2022
+```
+
+**Excel Format:**
+- Column A: Make
+- Column B: Model
+- Column C: Year
+- Row 1: Headers
+
+### API Testing with Postman
+1. Open `BE/Car_Management_API.postman_collection.json`
+2. Go to **IMPORT/EXPORT** folder
+3. Test all import/export endpoints
+4. Verify file downloads work
+
+## �📝 Testing Report Template
 
 ```
 Date: ___________
