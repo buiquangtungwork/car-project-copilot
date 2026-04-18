@@ -12,13 +12,13 @@
 
 ### Services Running
 - **Backend**: ✅ Running on http://localhost:8081
-- **Frontend**: ✅ Running on http://localhost:4200
+- **Frontend**: ✅ Running on http://localhost:4300
 - **Database**: ✅ MySQL on port 3506
 
 ## 🧪 Step-by-Step Testing
 
 ### Test 1: Open the Application
-1. Open browser: **http://localhost:4200**
+1. Open browser: **http://localhost:4300**
 2. You should see:
    - ✅ Beautiful iOS-style header
    - ✅ Search box
@@ -308,7 +308,7 @@ Honda,Civic,2022
 Date: ___________
 Tester: __________
 
-Frontend: ✅ Running at http://localhost:4200
+Frontend: ✅ Running at http://localhost:4300
 Backend: ✅ Running at http://localhost:8081
 Database: ✅ Connected on port 3506
 
@@ -334,7 +334,7 @@ curl -s http://localhost:8081/api/cars | grep "Toyota"
 # Should show Toyota Camry
 
 # Check CORS headers
-curl -s -H "Origin: http://localhost:4200" \
+curl -s -H "Origin: http://localhost:4300" \
      -H "Access-Control-Request-Method: GET" \
      http://localhost:8081/api/cars
 # Should show CORS headers in response

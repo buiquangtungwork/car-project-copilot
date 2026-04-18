@@ -66,10 +66,10 @@ cd FE
 npm install
 npm start
 ```
-Frontend runs on: http://localhost:4200
+Frontend runs on: http://localhost:4300
 
 ### 5. Test the Application
-- Open http://localhost:4200
+- Open http://localhost:4300
 - Create, read, update, and delete cars
 - Test search functionality
 
@@ -298,4 +298,4 @@ For issues or questions:
 
 **Built with ❤️ using Spring Boot and Angular**
 
-*Frontend: http://localhost:4200 | Backend: http://localhost:8081*
+*Frontend: http://localhost:4300 | Backend: http://localhost:8081*

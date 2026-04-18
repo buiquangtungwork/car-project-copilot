@@ -58,7 +58,10 @@
               "buildTarget": "car-management:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4300
+          }
         }
       }
     }
