@@ -70,7 +70,7 @@ export class CarService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<string>(`${this.apiUrl}/import`, formData).pipe(
+    return this.http.post(`${this.apiUrl}/import`, formData, { responseType: 'text' }).pipe(
       tap(response => {
         console.log('Successfully imported cars:', response);
       }),
